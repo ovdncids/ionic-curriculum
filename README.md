@@ -69,3 +69,12 @@ npx cap open android
   # Android Studio 실행
   # Android Studio ▶ 버튼 누르기
 ```
+
+## Ionic Storage
+* https://github.com/ionic-team/ionic-storage
+```sh
+npm install @ionic/storage-angular
+or
+npm install @ionic/storage
+```
+

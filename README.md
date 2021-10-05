@@ -78,3 +78,53 @@ or
 npm install @ionic/storage
 ```
 
+#### Storage 등록
+src/app/app.module.ts
+```ts
+import { IonicStorageModule } from '@ionic/storage-angular';
+
+@NgModule({
+  imports: [
+    IonicStorageModule.forRoot()
+```
+
+#### Storage를 사용할 수 있는 get, set 함수 만들기
+```sh
+# common service 생성
+ionic generate service services/common
+```
+
+src/app/services/common.service.ts
+```ts
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+@Injectable({
+  providedIn: 'root'
+})
+export class CommonService {
+  private storage: Storage | null = null;
+
+  constructor() { }
+
+  public createStorage(_storage: Storage) {
+    this.storage = _storage;
+  }
+
+  public async setStorage(key: string, value: any) {
+    await this.storage?.set(key, value);
+    debugger;
+  }
+
+  public async getStorage(key: string) {
+    const value = await this.storage?.get(key);
+    debugger;
+    return value;
+  }
+}
+```
+
+#### Storage 생성 및 사용
+src/app/app.component.ts
+```ts
+
+```

@@ -126,5 +126,55 @@ export class CommonService {
 #### Storage 생성 및 사용
 src/app/app.component.ts
 ```ts
+import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+import { CommonService } from './services/common.service';
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
+})
+export class AppComponent {
+  constructor(private _storage: Storage, private commonService: CommonService) {}
 
+  async ngOnInit() {
+    // storage 생성
+    debugger;
+    const storage = await this._storage.create();
+    debugger;
+    this.commonService.createStorage(storage);
+
+    // storage 사용
+    await this.commonService.setStorage('k1', 'v1');
+    debugger;
+    const k1 = await this.commonService.getStorage('k1');
+    debugger;
+    console.log(k1);
+  }
+}
+```
+
+src/app/tab1/tab1.page.ts
+```ts
+import { Component } from '@angular/core';
+import { CommonService } from '../services/common.service';
+@Component({
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss']
+})
+export class Tab1Page {
+  constructor(private commonService: CommonService ) {
+    this.init();
+  }
+
+  async init() {
+    debugger;
+    await this.commonService.setStorage('k2', 'v2');
+    debugger;
+    const k2 = await this.commonService.getStorage('k2');
+    debugger;
+    console.log(k2);
+  }
+}
 ```
